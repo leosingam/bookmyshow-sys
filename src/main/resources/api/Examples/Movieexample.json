@@ -1,0 +1,17 @@
+[{
+  "MovieID": 1,
+  "MovieName": "RRR",
+  "Language": "Hindi",
+  "TheatreName": "STR Screens",
+  "TheatreID": "STR",
+  "TotalTickets": 500,
+  "UnBooked": 500
+},
+  {"MovieID": 2,
+  "MovieName": "Run",
+  "Language": "Tamil",
+  "TheatreName": "STR Screens",
+  "TheatreID": "STR",
+  "TotalTickets": 1000,
+  "UnBooked": 1000
+  }]

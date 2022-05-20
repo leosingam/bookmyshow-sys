@@ -1,0 +1,85 @@
+#%RAML 1.0
+title: Sys BookMyShow API
+
+description: This is system API to book and display the tickets for the movies
+
+protocols: 
+  - HTTPS
+
+mediaType: 
+  - application/json
+  - application/xml
+version: 1.0.0
+
+traits:
+  errorResp: !include /Traits/errorResponsesTrait.raml
+  client-ID-Secret: !include /Traits/headerTrait.raml
+
+ 
+securitySchemes:
+  customSecurity: !include /SecuritySchemes/customSecurityScheme.raml
+
+types:
+  Movies: !include /DataTypes/MovieTicketsDataType.raml
+  TicketBooking: !include /DataTypes/PostTicketsDataType.raml
+  Booked: !include /DataTypes/BookedTicketsDataType.raml
+
+/smovieslist:
+  /{movieName}:
+    is: [errorResp, client-ID-Secret]
+    securedBy:
+    - customSecurity 
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: Movies[]
+              examples:
+                Output: !include Examples/Movieexample.json
+
+/sBookTickets:
+  is: [errorResp, client-ID-Secret]
+  securedBy:
+  - customSecurity 
+  post:
+    body:
+        application/json:
+          type: TicketBooking 
+          example: !include /Examples/TicketBooking.json
+    
+    responses:
+      201:
+        body:
+          application/json:
+            example: !include /Examples/TicketBookingResponse.json
+
+/sTicketBooked:
+  /{UserName}:
+    is: [errorResp, client-ID-Secret]
+    securedBy:
+    - customSecurity 
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: Booked[]
+              examples:
+                Output: !include /Examples/BookedTicketsResponse.json
+
+/seTickets:
+  /{UserName}:
+    /{OrderID}:
+      is: [errorResp, client-ID-Secret]
+      securedBy:
+      - customSecurity 
+      get:
+        responses:
+          200:
+            body:
+              application/json:
+                type: Booked[]
+                examples:
+                  Output: !include /Examples/BookedTicketsResponse.json
+

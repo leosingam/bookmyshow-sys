@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:wsc="http://www.mulesoft.org/schema/mule/wsc" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:tls="http://www.mulesoft.org/schema/mule/tls"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/wsc http://www.mulesoft.org/schema/mule/wsc/current/mule-wsc.xsd">
+	<http:listener-config name="HTTP_Listener_sys" doc:name="HTTP Listener config" doc:id="fc912720-b287-4db5-a4a9-7bfd10e9624e" >
+		<http:listener-connection protocol="HTTPS" port="${listener.port}" host="${listener.host}">
+			<tls:context >
+				<tls:key-store type="${keystore.server.type}" path="${keystore.server.path}" alias="${keystore.server.alias}" keyPassword="${keystore.server.keypassword}" password="${keystore.server.password}" />
+			</tls:context>
+		</http:listener-connection>
+	</http:listener-config>
+	<configuration-properties doc:name="Configuration properties" doc:id="dba4998d-60b7-4d5c-8d16-7bd20c9fa875" file="config.yaml" />
+	<db:config name="Database_Config_sys" doc:name="Database Config" doc:id="30772a92-d9f2-48cf-bec0-85668ada8b16" >
+		<db:my-sql-connection host="${database.host}" port="${database.port}" user="${database.username}" password="${database.password}" database="${database.name}" />
+	</db:config>
+	<wsc:config name="Web_Service_Consumer_Config" doc:name="Web Service Consumer Config" doc:id="96d9cef0-da6b-46c8-b2bb-6eb2c709cf9d" >
+		<wsc:connection wsdlLocation="orderMgmtWsdl.wsdl" service="OrderManagementService" port="OrderMgmtServicePort" address="http://localhost:8081/OrderManagementService/OrderMgmtServicePort"/>
+	</wsc:config>
+</mule>

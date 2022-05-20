@@ -1,0 +1,142 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://soap.training.mulesoft.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="OrderManagementService" targetNamespace="http://soap.training.mulesoft.com/">
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://soap.training.mulesoft.com/" elementFormDefault="unqualified" targetNamespace="http://soap.training.mulesoft.com/" version="1.0">
+			<xs:element name="bmsDTO" type="tns:bmsDTO"/>
+			<xs:element name="bookTicket" type="tns:bookTicket"/>
+			<xs:element name="bookTicketResponse" type="tns:bookTicketResponse"/>
+			<xs:element name="getETicket" type="tns:getETicket"/>
+			<xs:element name="getETicketResponse" type="tns:getETicketResponse"/>
+			<xs:element name="fetchUserHistory" type="tns:fetchUserHistory"/>
+			<xs:element name="fetchUserHistoryResponse" type="tns:fetchUserHistoryResponse"/>
+			<xs:complexType name="bmsDTO">
+				<xs:sequence>
+					<xs:element minOccurs="1" name="userId" type="xs:string"/>
+					<xs:element minOccurs="0" name="phoneNumber" type="xs:integer"/>
+					<xs:element minOccurs="0" name="userName" type="xs:string"/>
+					<xs:element minOccurs="0" name="city" type="xs:string"/>
+					<xs:element minOccurs="0" name="theatreName" type="xs:string"/>
+					<xs:element minOccurs="0" name="movieName" type="xs:string"/>
+					<xs:element minOccurs="0" name="showTime" type="xs:string"/>
+					<xs:element minOccurs="0" name="price" type="xs:integer"/>
+					<xs:element minOccurs="0" name="discount" type="xs:string"/>
+					<xs:element minOccurs="0" name="noOfSeats" type="xs:integer"/>
+					<xs:element minOccurs="0" name="paymentCardNumber" type="xs:integer"/>
+					<xs:element minOccurs="0" name="date" type="xs:string"/>
+					<xs:element minOccurs="0" name="bookingId" type="xs:string"/>
+					<xs:element minOccurs="0" name="hallNumber" type="xs:string"/>
+					<xs:element minOccurs="0" name="seatNumbers" type="xs:string"/>
+					<xs:element minOccurs="0" name="totalAmount" type="xs:integer"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="bookTicket">
+				<xs:sequence>
+					<xs:element minOccurs="1" name="userId" type="xs:string"/>
+					<xs:element minOccurs="0" name="phoneNumber" type="xs:integer"/>
+					<xs:element minOccurs="0" name="userName" type="xs:string"/>
+					<xs:element minOccurs="0" name="city" type="xs:string"/>
+					<xs:element minOccurs="0" name="theatreName" type="xs:string"/>
+					<xs:element minOccurs="0" name="movieName" type="xs:string"/>
+					<xs:element minOccurs="0" name="showTime" type="xs:string"/>
+					<xs:element minOccurs="0" name="price" type="xs:integer"/>
+					<xs:element minOccurs="0" name="discount" type="xs:string"/>
+					<xs:element minOccurs="0" name="noOfSeats" type="xs:integer"/>
+					<xs:element minOccurs="0" name="paymentCardNumber" type="xs:integer"/>
+					<xs:element minOccurs="0" name="date" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="bookTicketResponse">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="getETicket">
+				<xs:sequence>
+					<xs:element minOccurs="1" name="userId" type="xs:string"/>
+					<xs:element minOccurs="1" name="bookingId" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="getETicketResponse">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:bmsDTO"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="fetchUserHistory">
+				<xs:sequence>
+					<xs:element minOccurs="1" name="userId" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="fetchUserHistoryResponse">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:bmsDTO"/>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="bookTicket">
+		<wsdl:part element="tns:bookTicket" name="parameters"> </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="bookTicketResponse">
+		<wsdl:part element="tns:bookTicketResponse" name="parameters"> </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getETicket">
+		<wsdl:part element="tns:getETicket" name="parameters"> </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getETicketResponse">
+		<wsdl:part element="tns:getETicketResponse" name="parameters"> </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="fetchUserHistory">
+		<wsdl:part element="tns:fetchUserHistory" name="parameters"> </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="fetchUserHistoryResponse">
+		<wsdl:part element="tns:fetchUserHistoryResponse" name="parameters"> </wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="OrderMgmtService">
+		<wsdl:operation name="bookTicket">
+			<wsdl:input message="tns:bookTicket" name="bookTicket"> </wsdl:input>
+			<wsdl:output message="tns:bookTicketResponse" name="bookTicketResponse"> </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getETicket">
+			<wsdl:input message="tns:getETicket" name="getETicket"> </wsdl:input>
+			<wsdl:output message="tns:getETicketResponse" name="getETicketResponse"> </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="fetchUserHistory">
+			<wsdl:input message="tns:fetchUserHistory" name="fetchUserHistory"> </wsdl:input>
+			<wsdl:output message="tns:fetchUserHistoryResponse" name="fetchUserHistoryResponse"> </wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="OrderManagementServiceSoapBinding" type="tns:OrderMgmtService">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="bookTicket">
+			<soap:operation soapAction="" style="document"/>
+			<wsdl:input name="bookTicket">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="bookTicketResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getETicket">
+			<soap:operation soapAction="" style="document"/>
+			<wsdl:input name="getETicket">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getETicketResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="fetchUserHistory">
+			<soap:operation soapAction="" style="document"/>
+			<wsdl:input name="fetchUserHistory">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="fetchUserHistoryResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="OrderManagementService">
+		<wsdl:port binding="tns:OrderManagementServiceSoapBinding" name="OrderMgmtServicePort">
+			<soap:address location="http://localhost:8081/OrderManagementService/OrderMgmtServicePort"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

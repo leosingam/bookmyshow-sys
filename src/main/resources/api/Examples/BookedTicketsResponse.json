@@ -1,0 +1,25 @@
+[{
+  "BookingID": 1,
+  "MovieID": 1,
+  "MovieName": "RRR",
+  "Language": "Hindi",
+  "TheatreName": "STR Screens",
+  "TheatreID": "STR",
+  "TotalTickets": 500,
+  "BookedTickets": 3,
+  "Username": "Ravikumar",
+  "BookingStatus" : "Booked"
+},
+{
+  "BookingID": 1,
+  "MovieID": 2,
+  "MovieName": "KGF",
+  "Language": "Hindi",
+  "TheatreName": "STR Screens",
+  "TheatreID": "STR",
+  "TotalTickets": 1000,
+  "BookedTickets": 3,
+  "Username": "9442386025",
+  "BookingStatus" : "Booked"
+}
+]

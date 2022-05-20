@@ -1,0 +1,16 @@
+{
+  "sampleData": {
+    "7c521bcd-03d7-466e-be1d-6876936705a3": {
+      "vars-unbookedCurrent": "sample_data/list_java.dwl"
+    },
+    "3dbb5f30-c076-40a1-a413-ad6df00ad749": {
+      "payload": "sample_data/list_java_1.dwl"
+    },
+    "25db2150-2a73-44fb-92ac-aea0279f29e6": {
+      "payload": "sample_data/java.dwl"
+    },
+    "ce54e654-954d-4f77-be31-34ddfe0b2f94": {
+      "payload": "sample_data/java_1.dwl"
+    }
+  }
+}

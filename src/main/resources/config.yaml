@@ -1,0 +1,39 @@
+listener:
+  host: "localhost"
+  port: "8086"
+  protocol: "HTTPS"
+  basepath: "/"
+  
+database:
+  host: "mysql-78577-0.cloudclusters.net"
+  port: "14207"
+  username: "admin"
+  password: "Pny5loAm"
+  name: "BookMyShowTickets"
+  
+keystore:
+  client:
+    path: "clientkeystore.jks"
+    type: "JKS"
+    alias: "myclient"
+    keypassword: "password"
+    password: "password"
+  
+  server:
+    path: "serverkeystore.jks"
+    type: "JKS"
+    alias: "myserver"
+    keypassword: "password"
+    password: "password"
+    
+
+
+truststore:
+  client:
+    path: "clienttruststore.jks"
+    type: "JKS"
+    keypassword: "password"
+  server:
+    path: "servertruststore.jks"
+    type: "JKS"
+    keypassword: "password" 

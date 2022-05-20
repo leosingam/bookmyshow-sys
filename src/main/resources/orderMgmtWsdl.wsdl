@@ -136,7 +136,7 @@
 	</wsdl:binding>
 	<wsdl:service name="OrderManagementService">
 		<wsdl:port binding="tns:OrderManagementServiceSoapBinding" name="OrderMgmtServicePort">
-			<soap:address location="http://localhost:8081/OrderManagementService/OrderMgmtServicePort"/>
+			<soap:address location="http://bookmyshow-consume.us-e2.cloudhub.io/OrderManagementService/OrderMgmtServicePort"/>
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>

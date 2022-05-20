@@ -19,6 +19,6 @@ http://www.mulesoft.org/schema/mule/wsc http://www.mulesoft.org/schema/mule/wsc/
 		<db:my-sql-connection host="${database.host}" port="${database.port}" user="${database.username}" password="${database.password}" database="${database.name}" />
 	</db:config>
 	<wsc:config name="Web_Service_Consumer_Config" doc:name="Web Service Consumer Config" doc:id="96d9cef0-da6b-46c8-b2bb-6eb2c709cf9d" >
-		<wsc:connection wsdlLocation="orderMgmtWsdl.wsdl" service="OrderManagementService" port="OrderMgmtServicePort" address="http://localhost:8081/OrderManagementService/OrderMgmtServicePort"/>
+		<wsc:connection wsdlLocation="orderMgmtWsdl.wsdl" service="OrderManagementService" port="OrderMgmtServicePort" address="http://bookmyshow-consume.us-e2.cloudhub.io/OrderManagementService/OrderMgmtServicePort"/>
 	</wsc:config>
 </mule>

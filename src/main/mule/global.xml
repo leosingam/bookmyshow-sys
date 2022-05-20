@@ -8,7 +8,7 @@ http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/
 http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
 http://www.mulesoft.org/schema/mule/wsc http://www.mulesoft.org/schema/mule/wsc/current/mule-wsc.xsd">
 	<http:listener-config name="HTTP_Listener_sys" doc:name="HTTP Listener config" doc:id="fc912720-b287-4db5-a4a9-7bfd10e9624e" >
-		<http:listener-connection protocol="HTTPS" port="${listener.port}" host="${listener.host}">
+		<http:listener-connection protocol="HTTPS" port="${https.port}" host="${https.host}">
 			<tls:context >
 				<tls:key-store type="${keystore.server.type}" path="${keystore.server.path}" alias="${keystore.server.alias}" keyPassword="${keystore.server.keypassword}" password="${keystore.server.password}" />
 			</tls:context>

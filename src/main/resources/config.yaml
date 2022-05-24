@@ -5,10 +5,10 @@ https:
   basepath: "/"
   
 database:
-  host: "mysql-78577-0.cloudclusters.net"
-  port: "14207"
+  host: "mysql-79196-0.cloudclusters.net"
+  port: "13233"
   username: "admin"
-  password: "Pny5loAm"
+  password: "X5uZddwV"
   name: "BookMyShowTickets"
   
 keystore:

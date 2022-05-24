@@ -2,13 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.mycompany</groupId>
+	<groupId>0afefb7f-77f5-40e1-b1ea-33ab9ec81c74</groupId>
 	<artifactId>sys-bms-api</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>mule-application</packaging>
 
 	<name>sys-bms-api</name>
 
+	<description/>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -16,6 +17,8 @@
 		<app.runtime>4.4.0</app.runtime>
 		<mule.maven.plugin.version>3.5.4</mule.maven.plugin.version>
 		<munit.version>2.3.9</munit.version>
+		<tags/>
+		<categories>[]</categories>
 	</properties>
 
 	<build>
@@ -31,21 +34,21 @@
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-				    <cloudHubDeployment>
-				      <uri>https://anypoint.mulesoft.com</uri>
-				      <muleVersion>${app.runtime}</muleVersion>
-				      <username>${username}</username>
-				      <password>${password}</password>
-				      <applicationName>${cloudhub.application.name}</applicationName>
-				      <environment>${environment}</environment>
-				      <region>${region}</region>
-				      <workers>${workers}</workers>
-				      <workerType>${workerType}</workerType>
-				      <objectStoreV2>true</objectStoreV2>
-				      <properties>
-				        <key>value</key>
-				      </properties>
-				    </cloudHubDeployment>
+					<cloudHubDeployment>
+						<uri>https://anypoint.mulesoft.com</uri>
+						<muleVersion>${app.runtime}</muleVersion>
+						<username>${username}</username>
+						<password>${password}</password>
+						<applicationName>${cloudhub.application.name}</applicationName>
+						<environment>${environment}</environment>
+						<region>${region}</region>
+						<workers>${workers}</workers>
+						<workerType>${workerType}</workerType>
+						<objectStoreV2>true</objectStoreV2>
+						<properties>
+							<key>value</key>
+						</properties>
+					</cloudHubDeployment>
 					<sharedLibraries>
 						<sharedLibrary>
 							<groupId>mysql</groupId>

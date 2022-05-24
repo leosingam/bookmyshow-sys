@@ -11,7 +11,7 @@ http://www.mulesoft.org/schema/mule/wsc http://www.mulesoft.org/schema/mule/wsc/
 			<db:sql ><![CDATA[select * from BMS.THEATRE where MOVIE_NAME =:mov]]></db:sql>
 			<db:input-parameters ><![CDATA[#[{mov : attributes.uriParams.movieName}]]]></db:input-parameters>
 		</db:select>
-		<ee:transform doc:name="Transform Message" doc:id="3dbb5f30-c076-40a1-a413-ad6df00ad749" >
+		<ee:transform doc:name="movieTransform" doc:id="3dbb5f30-c076-40a1-a413-ad6df00ad749" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/json
@@ -28,10 +28,10 @@ payload map ( payload01 , indexOfPayload01 ) -> {
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<logger level="INFO" doc:name="Loggers" doc:id="c5b12777-a665-4bbe-9ba7-09fd658cad77" />
+		<logger level="INFO" doc:name="Loggers" doc:id="c5b12777-a665-4bbe-9ba7-09fd658cad77" message='#["End of system API - Movie List flow"]'/>
 		<error-handler >
 			<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="6e6ab9b5-1fe1-47fb-b5b4-e6ede45b652e" type="DB:CONNECTIVITY">
-				<ee:transform doc:name="Transform Message" doc:id="562b14f9-b920-4f43-8f16-16eacddbfcc0">
+				<ee:transform doc:name="movieError" doc:id="562b14f9-b920-4f43-8f16-16eacddbfcc0">
 					<ee:message>
 						<ee:set-payload><![CDATA[%dw 2.0
 output application/json
@@ -68,7 +68,7 @@ VALUES (:MOVIE_NO, :MOVIE_NAME,  :THEATRE_NAME, :THEATRE_NO, :LANGUAGE, :TOTAL_S
 }]]]></db:input-parameters>
 		</db:insert>
 		<flow-ref doc:name="unbookedUpdateFlowReference" doc:id="0cf98d1c-a7dc-4734-a622-ac8e115df787" name="updateUnbookedTicketsFlow"/>
-		<ee:transform doc:name="Transform Message" doc:id="95c9038d-0920-4452-ba37-621ce047e576" >
+		<ee:transform doc:name="bookTicketsResponse" doc:id="95c9038d-0920-4452-ba37-621ce047e576" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/json	
@@ -78,10 +78,10 @@ output application/json
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<logger level="INFO" doc:name="Logger" doc:id="723718de-1bb7-4f28-8531-4717ebb7c202" />
+		<logger level="INFO" doc:name="Logger" doc:id="723718de-1bb7-4f28-8531-4717ebb7c202" message='#["End of system API - book tickets flow"]'/>
 		<error-handler >
 			<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="7713f49a-8652-42dd-aca9-4e6ac1e4b5d2" type="DB:INSERT_CONNECTVITY">
-				<ee:transform doc:name="Transform Message" doc:id="5ac8396b-e2f7-4a23-8b63-492d5eee4c2e" >
+				<ee:transform doc:name="dBErrorResponse" doc:id="5ac8396b-e2f7-4a23-8b63-492d5eee4c2e" >
 					<ee:message >
 						<ee:set-payload ><![CDATA[%dw 2.0
 output application/json	
@@ -103,7 +103,7 @@ ORDER BY BOOKING_ID DESC LIMIT 1;]]></db:sql>
   USERNAME : vars.userName
 }]]]></db:input-parameters>
 				</db:update>
-				<ee:transform doc:name="Transform Message" doc:id="5ac15a26-0993-4b42-8c3b-b6463857a668" >
+				<ee:transform doc:name="dbQueryError" doc:id="5ac15a26-0993-4b42-8c3b-b6463857a668" >
 					<ee:message >
 						<ee:set-payload ><![CDATA[%dw 2.0
 output application/json
@@ -118,7 +118,7 @@ output application/json
 		</error-handler>
 	</flow>
 	<flow name="ticketsBookedFlow" doc:id="6dff6351-34ee-485d-9217-13c50e2d39f0" >
-		<ee:transform doc:name="Transform Message" doc:id="674440b5-9f1a-44a2-a8d1-290939046d8b" >
+		<ee:transform doc:name="JSON to XML" doc:id="674440b5-9f1a-44a2-a8d1-290939046d8b" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/xml
@@ -132,12 +132,12 @@ ns ns0 http://soap.training.mulesoft.com/
 			</ee:message>
 		</ee:transform>
 		<wsc:consume operation="fetchUserHistory" doc:id="7712cc09-ee65-49b5-a4f6-8f75aeccafe4" config-ref="Web_Service_Consumer_Config"/>
-		<ee:transform doc:name="Transform Message" doc:id="25db2150-2a73-44fb-92ac-aea0279f29e6">
+		<ee:transform doc:name="XML to JSON" doc:id="25db2150-2a73-44fb-92ac-aea0279f29e6">
 			<ee:message>
 				<ee:set-payload><![CDATA[%dw 2.0ns ns0 http://soap.training.mulesoft.com/output application/json---payload.body.ns0#fetchUserHistoryResponse.*return map ( return , indexOfReturn ) -> {	BookingID: return.bookingId as Number default 0,	MovieID: return.hallNumber as Number default 0,	MovieName: return.movieName default "",	Language: return.discount default "",	TheatreName: return.theatreName default "",	TheatreID: return.showTime default "",	TotalTickets: return.hallNumber as Number default 0,	BookedTickets: return.seatNumbers as Number default 0,	Username: return.username default "",	BookingStatus: return.date default ""}]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<logger level="INFO" doc:name="Logger" doc:id="201c002d-df2e-40a8-af3d-063500a9b8cc" />
+		<logger level="INFO" doc:name="Logger" doc:id="201c002d-df2e-40a8-af3d-063500a9b8cc" message='#["End of system API - User History flow"]'/>
 	</flow>
 	<sub-flow name="updateUnbookedTicketsFlow" doc:id="8ab62406-b2f2-43df-b23c-d365a184cb25" >
 		<db:select doc:name="selectUnbookedTickets" doc:id="dd55db65-f7e5-4296-b3e3-0df0105110c5" config-ref="Database_Config_sys" target="unbookedCurrent">
@@ -158,10 +158,10 @@ ns ns0 http://soap.training.mulesoft.com/
 	
 }]]]></db:input-parameters>
 		</db:update>
-		<logger level="INFO" doc:name="Logger" doc:id="14d1dbe9-3c67-41f0-803a-d7c1d6f9ffbb" />
+		<logger level="INFO" doc:name="Logger" doc:id="14d1dbe9-3c67-41f0-803a-d7c1d6f9ffbb" message='#["Updating the unbooked tickets in theaters flow"]'/>
 	</sub-flow>
 	<flow name="eTicketsFlow" doc:id="87cb8c64-fbd0-44b9-9392-1ef32ab122ee" >
-		<ee:transform doc:name="Transform Message" doc:id="53d4aebb-36ed-4487-94c2-95998641173e" >
+		<ee:transform doc:name="JSON to XML" doc:id="53d4aebb-36ed-4487-94c2-95998641173e" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/xml
@@ -176,7 +176,7 @@ ns ns0 http://soap.training.mulesoft.com/
 			</ee:message>
 		</ee:transform>
 		<wsc:consume doc:name="Consume" doc:id="5da5e882-d8df-461b-bc93-176cfea4f91e" config-ref="Web_Service_Consumer_Config" operation="getETicket"/>
-		<ee:transform doc:name="Transform Message" doc:id="ce54e654-954d-4f77-be31-34ddfe0b2f94" >
+		<ee:transform doc:name="XML to JSON" doc:id="ce54e654-954d-4f77-be31-34ddfe0b2f94" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
 ns ns0 http://soap.training.mulesoft.com/
@@ -197,6 +197,6 @@ payload.body.ns0#getETicketResponse.*return map ( return , indexOfReturn ) -> {
 ]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<logger level="INFO" doc:name="Logger" doc:id="da7886d4-f098-43b1-9994-dcdc88ef5303" />
+		<logger level="INFO" doc:name="Logger" doc:id="da7886d4-f098-43b1-9994-dcdc88ef5303" message='#["End of system API - return eTickets flow"]'/>
 	</flow>
 </mule>

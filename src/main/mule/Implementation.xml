@@ -7,7 +7,7 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
 http://www.mulesoft.org/schema/mule/wsc http://www.mulesoft.org/schema/mule/wsc/current/mule-wsc.xsd">
 	<flow name="moviesListFlow" doc:id="2bc4e28f-6796-478f-be32-e97bc93ae841" >
-		<set-variable value="#[&quot;select * from BMS.THEATRE where UCASE(MOVIE_NAME) like UCASE('&quot;++ attributes.uriParams.movieName default &quot;&quot; ++&quot;%')&quot; as String]" doc:name="sql" doc:id="00fdc6f6-47ae-4ef0-bf42-17170c8d2084" variableName="sql"/>
+		<set-variable value="#[&quot;select * from BMS.THEATRE where UCASE(MOVIE_NAME) like UCASE('&quot;++ attributes.queryParams.movieName as String  default '' ++&quot;%')&quot;]" doc:name="sql" doc:id="00fdc6f6-47ae-4ef0-bf42-17170c8d2084" variableName="sql"/>
 		<db:select doc:name="selectMovieList" doc:id="367188db-ba2c-4be6-bab6-e35273e1d29c" config-ref="Database_Config_sys">
 			<db:sql ><![CDATA[ #[vars.sql]]]></db:sql>
 			<db:input-parameters ><![CDATA[#[{mov : attributes.uriParams.movieName}]]]></db:input-parameters>

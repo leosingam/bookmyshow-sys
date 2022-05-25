@@ -123,13 +123,13 @@ output application/json
     <flow name="get:\sTicketBooked\(UserName):sys-bookmyshow-api-config">
         <flow-ref doc:name="sysTicketsBookedFlowReference" doc:id="2030968f-6307-4c52-83f1-916a29fca8bf" name="ticketsBookedFlow" />
     </flow>
-    <flow name="get:\smovieslist\(movieName):sys-bookmyshow-api-config">
+    <flow name="get:\smovieslist:sys-bookmyshow-api-config">
         <flow-ref doc:name="sysMoviesListFlowReference" doc:id="2c2489f1-18fe-463a-8393-18e2651b5575" name="moviesListFlow" />
     </flow>
-    <flow name="post:\sBookTickets:application\json:sys-bookmyshow-api-config">
+	<flow name="post:\sBookTickets:application\json:sys-bookmyshow-api-config">
         <flow-ref doc:name="sysBookTicketsFlowReference" doc:id="284edda1-c5d2-4ea0-82b6-054764eeb3b9" name="bookTicketsFlow" />
     </flow>
     <flow name="get:\seTickets\(UserName)\(OrderID):sys-bookmyshow-api-config">
-		<flow-ref doc:name="Flow Reference" doc:id="2a5ca6d5-edc9-49ef-89ca-06605f30d9ba" name="eTicketsFlow"/>
+        <flow-ref doc:name="Flow Reference" doc:id="2a5ca6d5-edc9-49ef-89ca-06605f30d9ba" name="eTicketsFlow" />
     </flow>
 </mule>

@@ -25,12 +25,15 @@ types:
   Booked: !include /DataTypes/BookedTicketsDataType.raml
 
 /smovieslist:
-  /{movieName}:
-    is: [errorResp, client-ID-Secret]
-    securedBy:
-    - customSecurity 
-    get:
-      responses:
+  is: [errorResp, client-ID-Secret]
+  securedBy:
+  - customSecurity 
+  get:
+     queryParameters:
+      movieName:
+        type: string
+        required: false
+     responses:
         200:
           body:
             application/json:
